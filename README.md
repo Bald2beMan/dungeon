@@ -1,2 +1,2 @@
-# dungeon
+# Dungeon
 text game im making
