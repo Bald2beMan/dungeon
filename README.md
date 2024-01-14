@@ -1,2 +1,2 @@
-# Horror game
-The text horror game im making in 7 days
+# Text Game Collection
+A collection of my text games
