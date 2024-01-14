@@ -1,2 +1,2 @@
-# Dungeon
-text game im making
+# Horror game
+The text horror game im making in 7 days
