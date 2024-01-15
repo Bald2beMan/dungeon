@@ -105,7 +105,7 @@ def option():
             choicelist.append(option)
             #print(option)
             type(option1)
-            if itemgot == 1:
+            if itemgot == 1 and itemname not in inv:
                 inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
@@ -114,7 +114,7 @@ def option():
             choicelist.append(option)
             #print(option)
             type(option2)
-            if itemgot == 2:
+            if itemgot == 2 and itemname not in inv:
                 inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
@@ -123,7 +123,7 @@ def option():
             choicelist.append(option)
             #print(option)
             type(option3)
-            if itemgot == 3:
+            if itemgot == 3 and itemname not in inv:
                 inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
@@ -131,8 +131,8 @@ def option():
         elif optionmax >= 4 and (option == '4' or option == choice4):
             choicelist.append(option)
             #print(option)
-            type(option3)
-            if itemgot == 4:
+            type(option4)
+            if itemgot == 4 and itemname not in inv:
                 inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
@@ -140,8 +140,8 @@ def option():
         elif optionmax >= 5 and (option == '5' or option == choice5):
             choicelist.append(option)
             #print(option)
-            type(option3)
-            if itemgot == 5:
+            type(option5)
+            if itemgot == 5 and itemname not in inv:
                 inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
@@ -176,14 +176,14 @@ itemname = 'flashlight'
 choicelist = []
 optionmax = 3
 #description and choices
-desc = 'A'
+desc = 'What do you do?'
 choice1 = 'get flashlight'
-choice2 = 'b'
-choice3 = 'c'
+choice2 = 'look to the left'
+choice3 = 'look to the right'
 #options
-option1 = 'got flashlight'
-option2 = 'chose b'
-option3 = 'chose c'
+option1 = 'got '+green+'flashlight'+cend
+option2 = 'you took a look to the left'
+option3 = 'you have gazed at the right direction'
 choice()
 option()
 print('\n')
@@ -196,16 +196,16 @@ itemname = ''
 choicelist = []
 optionmax = 4
 #description and choices
-desc = 'B'
-choice1 = 'd'
-choice2 = 'e'
-choice3 = 'f'
-choice4 = 'g'
+desc = 'Am I in your house?'
+choice1 = 'yes'
+choice2 = 'no'
+choice3 = '*youre'
+choice4 = 'youre mom'
 #options
-option1 = 'chose d'
-option2 = 'chose e'
-option3 = 'chose f'
-option4 = 'chose g'
+option1 = 'indeed'
+option2 = 'look behind you'
+option3 = 'bruh'
+option4 = 'oh god'
 choice()
 option()
 print('\n')
