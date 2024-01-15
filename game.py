@@ -5,7 +5,6 @@ import textwrap
 os.system('color')
 # window title
 os.system('title Text game')
-
 # textwrap.wrap(type, width=20)
 
 #------ GLOBAL VARIABLES ------#
@@ -33,13 +32,16 @@ def clear():
     os.system('cls||clear')
     print("\n" * 100)
 clear()
+#------------------------------#
 
 #------ TITLE SCREEN ------#
-title = red+pyfiglet.figlet_format("P l a c e\nH o l d e r", font = "o8")+cend           # o8, epic, chunky, nancyj-fancy
+#good fonts - o8, epic, chunky, nancyj-fancy
+title = red+pyfiglet.figlet_format("P l a c e\nH o l d e r", font = "o8")+cend
 author = green+namec+"RobinBall\n"+cend
 print(title)
 print ('By '+author)
 print("\n" * 10)
+#--------------------------#
 
 #letter by letter function
 def type(x):
@@ -59,7 +61,14 @@ def type(x):
 #   lns = chs
 
 #------  START OF THE GAME ------#
-# choice system
+
+#------ inventory system ------#
+inv = []
+itemgot = 0
+itemname = ''
+#------------------------------#
+
+#------ choice system ------#
 choice1 = 'a'
 choice2 = 'a'
 choice3 = 'a'
@@ -85,15 +94,19 @@ def choice():
     words = ns
     lines = lns
 screen_code = "\033[1A[\033[2K"
-#option system
+#---------------------------#
+
+#------ option system ------#
 def option():
     while len(set(choicelist)) < optionmax:
-        option = input('  ')
+        option = input('  ').lower()
 
         if optionmax >= 1 and (option == '1' or option == choice1):
             choicelist.append(option)
             #print(option)
             type(option1)
+            if itemgot == 1:
+                inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
 
@@ -101,6 +114,8 @@ def option():
             choicelist.append(option)
             #print(option)
             type(option2)
+            if itemgot == 2:
+                inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
 
@@ -108,6 +123,8 @@ def option():
             choicelist.append(option)
             #print(option)
             type(option3)
+            if itemgot == 3:
+                inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
 
@@ -115,6 +132,8 @@ def option():
             choicelist.append(option)
             #print(option)
             type(option3)
+            if itemgot == 4:
+                inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
 
@@ -122,38 +141,60 @@ def option():
             choicelist.append(option)
             #print(option)
             type(option3)
+            if itemgot == 5:
+                inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
+
+        #------ commands ------#
+        elif option == 'inventory' or option == 'inv' or option == 'i':
+            print(namec+green+'\n  Inventory:'+cend)
+            for item in inv:
+                type(green+'  '+item+cend)
+            if len(set(choicelist)) < optionmax:
+                choice()
+        #----------------------#
         else:
-            type(chbox+'  there is no such option'+cend)
+            type(chbox+'  there is no such option nor a command'+cend)
 
             #check if all options chosen
             if len(set(choicelist)) < optionmax:
                 choice()
+#---------------------------#
 
 print(chbox+'  Enter you name:\n'+cend)
 name = input('  ')
 name = namec+name.capitalize()+cend
 
 type('This is a place holder '+name+' be careful bruh\n')
+
 type('Another placeholder here too')
-#description and choices
-desc = 'A'
-choice1 = 'a'
-choice2 = 'b'
-choice3 = 'c'
-#options
-option1 = 'chose a'
-option2 = 'chose b'
-option3 = 'chose c'
+#inventory
+itemgot = 1
+itemname = 'flashlight'
 #choice list, option max number
 choicelist = []
 optionmax = 3
+#description and choices
+desc = 'A'
+choice1 = 'get flashlight'
+choice2 = 'b'
+choice3 = 'c'
+#options
+option1 = 'got flashlight'
+option2 = 'chose b'
+option3 = 'chose c'
 choice()
 option()
 print('\n')
 
 type('here there is another choice')
+#inventory
+itemgot = 0
+itemname = ''
+#choice list, option max number
+choicelist = []
+optionmax = 4
 #description and choices
 desc = 'B'
 choice1 = 'd'
@@ -165,9 +206,6 @@ option1 = 'chose d'
 option2 = 'chose e'
 option3 = 'chose f'
 option4 = 'chose g'
-#choice list, option max number
-choicelist = []
-optionmax = 4
 choice()
 option()
 print('\n')
