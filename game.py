@@ -5,13 +5,18 @@ import textwrap
 os.system('color')
 # window title
 os.system('title Text game')
-# textwrap.wrap(type, width=20)
 
 #------ GLOBAL VARIABLES ------#
 #word speed
 words = 0.05
 ns = 0.05
 chs = 0.01
+#choices
+choice1 = ''
+choice2 = ''
+choice3 = ''
+choice4 = ''
+choice5 = ''
 #linespeed
 lines = 0.5
 lns = 0.5
@@ -31,18 +36,6 @@ green = '\33[92m'
 def clear():
     os.system('cls||clear')
     print("\n" * 100)
-clear()
-#------------------------------#
-
-#------ TITLE SCREEN ------#
-#good fonts - o8, epic, chunky, nancyj-fancy
-title = red+pyfiglet.figlet_format("P l a c e\nH o l d e r", font = "o8")+cend
-author = green+namec+"RobinBall\n"+cend
-print(title)
-print ('By '+author)
-print("\n" * 10)
-#--------------------------#
-
 #letter by letter function
 def type(x):
     for char in x:
@@ -53,27 +46,30 @@ def type(x):
             else:
                 time.sleep(lines)
 
-
+#------ TITLE SCREEN ------#
+clear()
+#good fonts - o8, epic, chunky, nancyj-fancy
+title = red+pyfiglet.figlet_format("P l a c e\nH o l d e r", font = "o8")+cend
+author = green+namec+"RobinBall\n"+cend
+print(title)
+print('By '+author)
+print('commands:\nI, inv - open inventory')
+print("\n" * 10)
+print(chbox+'  Enter you name:\n'+cend)
+name = input('  ')
+name = namec+name.capitalize()+cend
 #NOT WORKING
 #debugMode = 0
 #while debugMode == 1:
 #   ns = chs
 #   lns = chs
 
-#------  START OF THE GAME ------#
-
 #------ inventory system ------#
 inv = []
+#state option to add item
 itemgot = 0
 itemname = ''
-#------------------------------#
-
 #------ choice system ------#
-choice1 = 'a'
-choice2 = 'a'
-choice3 = 'a'
-choice4 = 'a'
-choice5 = 'a'
 def choice():
     global lines, words
     lines = chs
@@ -89,13 +85,10 @@ def choice():
         type('  1. ' + choice1 + '\n  2. ' + choice2 + '\n  3. ' + choice3 + '\n  4. ' + choice4 + '\n\n' + cend)
     elif optionmax == 5:
         type('  1. ' + choice1 + '\n  2. ' + choice2 + '\n  3. ' + choice3 + '\n  4. ' + choice4 + '\n  5. ' + choice5 + '\n\n' + cend)
-    else:
-        None
+    else: None
     words = ns
     lines = lns
 screen_code = "\033[1A[\033[2K"
-#---------------------------#
-
 #------ option system ------#
 def option():
     while len(set(choicelist)) < optionmax:
@@ -109,6 +102,7 @@ def option():
                 inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
+            else: input(chbox+'\n\n\nContinue... '+cend)
 
         elif optionmax >= 2 and (option == '2' or option == choice2):
             choicelist.append(option)
@@ -118,6 +112,7 @@ def option():
                 inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
+            else: input(chbox+'\n\n\nContinue... '+cend)
 
         elif optionmax >= 3 and (option == '3' or option == choice3):
             choicelist.append(option)
@@ -127,6 +122,7 @@ def option():
                 inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
+            else: input(chbox+'\n\n\nContinue... '+cend)
 
         elif optionmax >= 4 and (option == '4' or option == choice4):
             choicelist.append(option)
@@ -136,6 +132,7 @@ def option():
                 inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
+            else: input(chbox+'\n\n\nContinue... '+cend)
 
         elif optionmax >= 5 and (option == '5' or option == choice5):
             choicelist.append(option)
@@ -145,29 +142,30 @@ def option():
                 inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
+            else: input(chbox+'\n\n\nContinue... '+cend)
 
         #------ commands ------#
         elif option == 'inventory' or option == 'inv' or option == 'i':
             print(namec+green+'\n  Inventory:'+cend)
-            for item in inv:
-                type(green+'  '+item+cend)
+            if len(inv) > 0:
+                for item in inv:
+                    type(green+'  '+item+cend)
+            else:
+                type(green+'  no items'+cend)
             if len(set(choicelist)) < optionmax:
                 choice()
+            else: input(chbox+'\n\n\nContinue... '+cend)
         #----------------------#
         else:
             type(chbox+'  there is no such option nor a command'+cend)
-
             #check if all options chosen
             if len(set(choicelist)) < optionmax:
                 choice()
-#---------------------------#
-
-print(chbox+'  Enter you name:\n'+cend)
-name = input('  ')
-name = namec+name.capitalize()+cend
-
+            else: input(chbox+'\n\n\nContinue... '+cend)
+#------  START OF THE GAME ------#
+time.sleep(1)
+clear()
 type('This is a place holder '+name+' be careful bruh\n')
-
 type('Another placeholder here too')
 #inventory
 itemgot = 1
@@ -181,13 +179,15 @@ choice1 = 'get flashlight'
 choice2 = 'look to the left'
 choice3 = 'look to the right'
 #options
-option1 = 'got '+green+'flashlight'+cend
+option1 = 'got '+green+itemname+cend
 option2 = 'you took a look to the left'
 option3 = 'you have gazed at the right direction'
 choice()
 option()
 print('\n')
-
+#~~~~~~~~~~~~#
+time.sleep(1)
+clear()
 type('here there is another choice')
 #inventory
 itemgot = 0
@@ -209,5 +209,6 @@ option4 = 'oh god'
 choice()
 option()
 print('\n')
+#~~~~~~~~~~~~#
 
 input(chbox+'\n\n\n  Exit by pressing enter...   '+cend)
