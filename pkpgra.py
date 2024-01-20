@@ -8,8 +8,8 @@ os.system('title Text game')
 
 #------ GLOBAL VARIABLES ------#
 #word speed
-words = 0.05
-ns = 0.05
+words = 0.07
+wns = 0.07
 chs = 0.01
 #linespeed
 lines = 0.5
@@ -28,10 +28,15 @@ chatb = '\33[30m'+'\33[46m'
 #colors
 red = '\033[91m'
 green = '\33[92m'
+yellow = '\33[33m'
+yellowb = '\33[43m'+'\33[30m'
+grey = '\33[100m'
+bold = '\33[1m'
 #clear console
-def clear():
+def line():
     #os.system('cls||clear')
-    print("\n" * 40)
+    print("@#%" * 40)
+    print("\n" * 1)
 #letter by letter function
 def type(x):
     for char in x:
@@ -41,18 +46,53 @@ def type(x):
                 time.sleep(words)
             else:
                 time.sleep(lines)
-
+#------ START CUTSCENE ------#
+# a quick placeholder like cutscene for now
+os.system('cls||clear')
+time.sleep(1)
+print(grey)
+lines = 0.8
+words = wns
+type('I wasnt supposed to be here')
+words = 0.5
+type('...\n')
+words = 0.09
+type('Wrong place, wrong time and now im trapped in here, with no possibility to escape.\n')
+type('I think im loosing my mind,\n')
+time.sleep(1)
+words = 0.15
+type('what was my name again?')
+words = 0.5
+type('...\n')
+words = 0.07
+lines = 0.5
+print(cend)
+time.sleep(1)
 #------ TITLE SCREEN ------#
-clear()
+line()
+lines = chs
+words = chs
 #good fonts - o8, epic, chunky, nancyj-fancy
-title = red+pyfiglet.figlet_format("P l a c e\nH o l d e r", font = "o8")+cend
+title = red+pyfiglet.figlet_format("P K P\n", font = "o8")
+subtitle = pyfiglet.figlet_format("Intercity", font = "chunky")+cend
 author = authorc+"RobinBall\n"+cend
-print(title)
+print(title+subtitle)
 print('By '+author)
-print('Place holder of a description of the game before it begins. \nyou can always check history by scrolling.')
-print('Use a terminal with scrolling functionality and color, for the best expirience\n')
-print('commands:\nI, inv - open inventory')
-print("\n" * 5)
+#------ instructions ------#
+print(yellow)
+print('Trapped in a box of steel with no escape, and no one is willing to help. It was supposed to be a normal trip for work.\n')
+print('Use a terminal with scrolling functionality and color, for the best expirience')
+print('you can always check history by scrolling.\n')
+print(cend)
+print(bold+'COMMANDS:'+cend+yellow+'\nI, inv'+cend+'     open inventory\n')
+print(bold+'LEGEND:'+cend)
+print(grey+'grey'+cend+'       for thoughts')
+print(green+'green'+cend+'      for inventory prompts')
+print(yellow+'yellow'+cend+'     for conversations')
+print(chbox+'cyan'+cend+'       for system messages')
+print("\n" * 1)
+line()
+#--------------------------#
 print(chbox+'Enter you name:\n'+cend)
 name = input('')
 name = namec+name.capitalize()+cend
@@ -60,7 +100,7 @@ os.system('cls||clear')
 #NOT WORKING
 #debugMode = 0
 #while debugMode == 1:
-#   ns = chs
+#   wns = chs
 #   lns = chs
 
 #------ inventory system ------#
@@ -85,7 +125,7 @@ def choice():
     elif optionmax == 5:
         type('  1. ' + choice1 + '\n  2. ' + choice2 + '\n  3. ' + choice3 + '\n  4. ' + choice4 + '\n  5. ' + choice5 + '\n\n' + cend)
     else: None
-    words = ns
+    words = wns
     lines = lns
 screen_code = "\033[1A[\033[2K"
 #------ option system ------#
@@ -101,7 +141,7 @@ def option():
                 inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
-            else: input(chbox+'\n\n\nContinue... '+cend)
+            else: input(chbox+'\n\nContinue... '+cend)
 
         elif optionmax >= 2 and (option == '2' or option == choice2):
             choicelist.append(option)
@@ -111,7 +151,7 @@ def option():
                 inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
-            else: input(chbox+'\n\n\nContinue... '+cend)
+            else: input(chbox+'\n\nContinue... '+cend)
 
         elif optionmax >= 3 and (option == '3' or option == choice3):
             choicelist.append(option)
@@ -121,7 +161,7 @@ def option():
                 inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
-            else: input(chbox+'\n\n\nContinue... '+cend)
+            else: input(chbox+'\n\nContinue... '+cend)
 
         elif optionmax >= 4 and (option == '4' or option == choice4):
             choicelist.append(option)
@@ -131,7 +171,7 @@ def option():
                 inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
-            else: input(chbox+'\n\n\nContinue... '+cend)
+            else: input(chbox+'\n\nContinue... '+cend)
 
         elif optionmax >= 5 and (option == '5' or option == choice5):
             choicelist.append(option)
@@ -141,7 +181,7 @@ def option():
                 inv.append(itemname)
             if len(set(choicelist)) < optionmax:
                 choice()
-            else: input(chbox+'\n\n\nContinue... '+cend)
+            else: input(chbox+'\n\nContinue... '+cend)
 
         #------ commands ------#
         elif option == 'inventory' or option == 'inv' or option == 'i':
@@ -153,19 +193,20 @@ def option():
                 type(green+'  no items'+cend)
             if len(set(choicelist)) < optionmax:
                 choice()
-            else: input(chbox+'\n\n\nContinue... '+cend)
+            else: input(chbox+'\n\nContinue... '+cend)
         #----------------------#
         else:
             type(chbox+'  there is no such option nor a command'+cend)
             #check if all options chosen
             if len(set(choicelist)) < optionmax:
                 choice()
-            else: input(chbox+'\n\n\nContinue... '+cend)
+            else: input(chbox+'\n\nContinue... '+cend)
 
 #------  START OF THE GAME ------#
+words = 0.07
+lines = 0.5
 time.sleep(1)
-clear()
-type('This is a place holder '+name+' be careful bruh\n')
+type('\nThis is a place holder '+name+' be careful bruh\n')
 type('Another placeholder here too')
 #inventory
 itemgot = 1
@@ -187,12 +228,12 @@ option()
 print('\n')
 #~~~~~~~~~~~~#
 time.sleep(1)
-clear()
+line()
 #speaker system
 speaker = 'yourmom'
 speakerlen = len(speaker) + 2
-speaker = chatb+speaker+':'+cend+' '
-type(speaker+'Here there is another choice\n'+' '*speakerlen+'test of the speaker function')
+speaker = yellowb+speaker+':'+cend+' '
+type(speaker+yellow+'Here there is another choice\n'+' '*speakerlen+'test of the speaker function'+cend)
 #inventory
 itemgot = 0
 itemname = ''
