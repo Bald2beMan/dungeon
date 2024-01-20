@@ -35,8 +35,7 @@ bold = '\33[1m'
 #clear console
 def line():
     #os.system('cls||clear')
-    print("@#%" * 40)
-    print("\n" * 1)
+    print('\n'+"@#%" * 40 + '\n')
 #letter by letter function
 def type(x):
     for char in x:
@@ -47,55 +46,70 @@ def type(x):
             else:
                 time.sleep(lines)
 #------ START CUTSCENE ------#
+cutscene = 0
 # a quick placeholder like cutscene for now
-os.system('cls||clear')
-time.sleep(1)
-print(grey)
-lines = 0.8
-words = wns
-type('I wasnt supposed to be here')
-words = 0.5
-type('...\n')
-words = 0.09
-type('Wrong place, wrong time and now im trapped in here, with no possibility to escape.\n')
-type('I think im loosing my mind,\n')
-time.sleep(1)
-words = 0.15
-type('what was my name again?')
-words = 0.5
-type('...\n')
-words = 0.07
-lines = 0.5
-print(cend)
-time.sleep(1)
+if cutscene == 1:
+    os.system('cls||clear')
+    time.sleep(1)
+    print(grey)
+    lines = 0.8
+    words = wns
+    type('Nie powinno mnie tu być')
+    words = 0.5
+    type('...\n')
+    words = 0.09
+    type('Znalazłem się w złym miejscu o złym czasie, ale teraz nie ma powrotu.\n')
+    type('Chyba psycha mi siada,\n')
+    time.sleep(1)
+    words = 0.15
+    type('jak ja miałem na imię?')
+    words = 0.5
+    type('...\n')
+    words = 0.07
+    lines = 0.5
+    print(cend)
+    time.sleep(1)
+else: os.system('cls||clear')
 #------ TITLE SCREEN ------#
 line()
 lines = chs
 words = chs
 #good fonts - o8, epic, chunky, nancyj-fancy
-title = red+pyfiglet.figlet_format("P K P\n", font = "o8")
+title = red+pyfiglet.figlet_format("P K P", font = "o8")
 subtitle = pyfiglet.figlet_format("Intercity", font = "chunky")+cend
-author = authorc+"RobinBall\n"+cend
+author = authorc+"RobinBall"+cend
 print(title+subtitle)
-print('By '+author)
-#------ instructions ------#
+train = """
+   _____                 . . . . . o o o o o
+  __|[_]|__ ___________ _______    ____      o
+ |[] [] []| [] [] [] [] [_____(__  ][]]_n_n__][.
+_|________|_[_________]_[________]_|__|________)<
+  oo    oo 'oo      oo ' oo    oo 'oo 0000---oo\_
+"""
+print(train)
+print('Stworzone przez: '+author)
 print(yellow)
-print('Trapped in a box of steel with no escape, and no one is willing to help. It was supposed to be a normal trip for work.\n')
-print('Use a terminal with scrolling functionality and color, for the best expirience')
-print('you can always check history by scrolling.\n')
+print('\nZamknięty w bezkresnym stalowym pudle, bez możliwości ucieczki, bez nikogo do pomocy.\nMiała to być tylko krótka podróż do pracy.')
 print(cend)
-print(bold+'COMMANDS:'+cend+yellow+'\nI, inv'+cend+'     open inventory\n')
-print(bold+'LEGEND:'+cend)
-print(grey+'grey'+cend+'       for thoughts')
-print(green+'green'+cend+'      for inventory prompts')
-print(yellow+'yellow'+cend+'     for conversations')
-print(chbox+'cyan'+cend+'       for system messages')
+line()
+
+name = input(chbox+'Podaj swoje imię: '+cend)
+name = namec+name.capitalize()+cend
+os.system('cls||clear')
+#------ instructions ------#
+line()
+print('Używaj terminala z opcją scrollowania i z obsługą kolorów, dla najlepszych wrażeń,')
+print('zawsze możesz sprawdzić historie gry poprzez scrollowanie.\n')
+print(bold+'KOMENDY:'+cend+yellow+'\neq'+cend+'         otwórz ekwipunek\n')
+print(bold+'LEGENDA:'+cend)
+print(grey+'szary'+cend+'      przedstawia myśli')
+print(green+'green'+cend+'      przedstawia akcje inwentarzu')
+print(yellow+'yellow'+cend+'     przedstawia konwersacje')
+print(chbox+'cyan'+cend+'       przedstawia systemowe wiadomości')
 print("\n" * 1)
 line()
 #--------------------------#
-print(chbox+'Enter you name:\n'+cend)
-name = input('')
-name = namec+name.capitalize()+cend
+input(chbox+'Continue... '+cend)
 os.system('cls||clear')
 #NOT WORKING
 #debugMode = 0
@@ -184,7 +198,7 @@ def option():
             else: input(chbox+'\n\nContinue... '+cend)
 
         #------ commands ------#
-        elif option == 'inventory' or option == 'inv' or option == 'i':
+        elif option == 'inventory' or option == 'eq' or option == 'inwentarz':
             print(namec+green+'\n  Inventory:'+cend)
             if len(inv) > 0:
                 for item in inv:
